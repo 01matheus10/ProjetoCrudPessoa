@@ -169,8 +169,29 @@ Caso a aplicação esteja sendo executada em outra porta, basta alterar o valor 
 6. Selecione o ambiente **Local**.
 7. Execute as requisições da collection.
 
+---
+
+## Evidências
+
+As evidências dos testes realizados nos endpoints da API estão disponíveis na pasta:
+
+```text
+evidencias/
 ```
+
+Arquivos incluídos:
+
+```text
+01-post-sucesso.png
+02-post-cpf-duplicado.png
+03-get-listar-pessoas.png
+04-get-filtrar-nome.png
+05-get-filtrar-cpf.png
+06-patch-sucesso.png
+07-delete-sucesso.png
 ```
+
+As capturas demonstram o funcionamento dos principais fluxos da aplicação, incluindo cadastro, atualização, remoção lógica, paginação, filtros e validações de regras de negócio.
 
 ---
 
