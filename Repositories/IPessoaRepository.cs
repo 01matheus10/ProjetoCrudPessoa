@@ -12,9 +12,15 @@ namespace ProjetoCrudPessoa.Repositories
 
         Task RemoverAsync(Pessoa pessoa);
 
-        Task<List<Pessoa>> ListarAsync(int page, int pageSize);
+        Task<List<Pessoa>> ListarAsync(
+            int page,
+            int pageSize,
+            string? nome,
+            string? cpf);
 
-        Task<int> ContarAsync();
+        Task<int> ContarAsync(
+            string? nome,
+            string? cpf);
 
         Task<bool> ExisteCpfAsync(string cpf);
 

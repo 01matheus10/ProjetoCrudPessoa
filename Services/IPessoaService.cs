@@ -10,6 +10,10 @@ namespace ProjetoCrudPessoa.Services
 
         Task<bool> RemoverAsync(int id);
 
-        Task<object> ListarAsync(int page, int pageSize);
+        Task<object> ListarAsync(
+            int page,
+            int pageSize,
+            string? nome,
+            string? cpf);
     }
 }

@@ -75,11 +75,21 @@ namespace ProjetoCrudPessoa.Services
             return true;
         }
 
-        public async Task<object> ListarAsync(int page, int pageSize)
+        public async Task<object> ListarAsync(
+            int page,
+            int pageSize,
+            string? nome,
+            string? cpf)
         {
-            var totalRegistros = await _repository.ContarAsync();
+            var totalRegistros = await _repository.ContarAsync(
+                nome,
+                cpf);
 
-            var pessoas = await _repository.ListarAsync(page, pageSize);
+            var pessoas = await _repository.ListarAsync(
+                page,
+                pageSize,
+                nome,
+                cpf);
 
             var dados = pessoas.Select(p => new PessoaResponseDto
             {

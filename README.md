@@ -190,11 +190,33 @@ Os registros permanecem armazenados no banco de dados, porém não são retornad
 GET /api/pessoas?page=1&pageSize=10
 ```
 
-### Exemplo
+### Filtros disponíveis
+
+#### Filtrar por nome
 
 ```http
-GET /api/pessoas?page=1&pageSize=5
+GET /api/pessoas?nome=joao
 ```
+
+#### Filtrar por CPF
+
+```http
+GET /api/pessoas?cpf=12345678901
+```
+
+#### Filtrar por nome e CPF
+
+```http
+GET /api/pessoas?nome=joao&cpf=12345678901
+```
+
+#### Filtrar utilizando paginação
+
+```http
+GET /api/pessoas?page=1&pageSize=5&nome=joao
+```
+
+Os filtros são opcionais e podem ser combinados com a paginação.
 
 ---
 
@@ -209,6 +231,7 @@ GET /api/pessoas?page=1&pageSize=5
 
 * Obrigatório
 * Deve conter exatamente 11 dígitos
+* Não permite cadastro de CPF duplicado
 
 ### Idade
 
@@ -226,6 +249,9 @@ GET /api/pessoas?page=1&pageSize=5
 * Atualização parcial utilizando PATCH
 * Remoção lógica
 * Consulta paginada
+* Filtro opcional por nome
+* Filtro opcional por CPF
+* Validação de CPF duplicado
 * Validação com FluentValidation
 * Persistência utilizando Entity Framework Core
 * Migrations para criação do banco de dados

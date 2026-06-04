@@ -40,20 +40,56 @@ namespace ProjetoCrudPessoa.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<List<Pessoa>> ListarAsync(int page, int pageSize)
+        public async Task<List<Pessoa>> ListarAsync(
+            int page,
+            int pageSize,
+            string? nome,
+            string? cpf)
         {
-            return await _context.Pessoas
+            var query = _context.Pessoas
                 .Where(x => x.Status == 1)
+                .AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(nome))
+            {
+                query = query.Where(x =>
+                    x.Nome.Contains(nome));
+            }
+
+            if (!string.IsNullOrWhiteSpace(cpf))
+            {
+                query = query.Where(x =>
+                    x.CPF == cpf);
+            }
+
+            return await query
                 .OrderBy(x => x.Id)
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
                 .ToListAsync();
         }
 
-        public async Task<int> ContarAsync()
+        public async Task<int> ContarAsync(
+            string? nome,
+            string? cpf)
         {
-            return await _context.Pessoas
-                .CountAsync(x => x.Status == 1);
+            var query = _context.Pessoas
+                .Where(x => x.Status == 1)
+                .AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(nome))
+            {
+                query = query.Where(x =>
+                    x.Nome.Contains(nome));
+            }
+
+            if (!string.IsNullOrWhiteSpace(cpf))
+            {
+                query = query.Where(x =>
+                    x.CPF == cpf);
+            }
+
+            return await query.CountAsync();
         }
 
         public async Task<bool> ExisteCpfAsync(string cpf)

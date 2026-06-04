@@ -88,10 +88,16 @@ namespace ProjetoCrudPessoa.Controllers
 
         [HttpGet]
         public async Task<IActionResult> Listar(
-        int page = 1,
-        int pageSize = 10)
+            int page = 1,
+            int pageSize = 10,
+            string? nome = null,
+            string? cpf = null)
         {
-            var resultado = await _service.ListarAsync(page, pageSize);
+            var resultado = await _service.ListarAsync(
+                page,
+                pageSize,
+                nome,
+                cpf);
 
             return Ok(resultado);
         }
