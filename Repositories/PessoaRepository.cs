@@ -55,5 +55,19 @@ namespace ProjetoCrudPessoa.Repositories
             return await _context.Pessoas
                 .CountAsync(x => x.Status == 1);
         }
+
+        public async Task<bool> ExisteCpfAsync(string cpf)
+        {
+            return await _context.Pessoas
+                .AnyAsync(x => x.CPF == cpf && x.Status == 1);
+        }
+
+        public async Task<bool> ExisteCpfEmOutroRegistroAsync(int id, string cpf)
+        {
+            return await _context.Pessoas
+                .AnyAsync(x => x.Id != id &&
+                               x.CPF == cpf &&
+                               x.Status == 1);
+        }
     }
 }

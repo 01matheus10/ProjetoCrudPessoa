@@ -18,12 +18,22 @@ namespace ProjetoCrudPessoa.Controllers
         [HttpPost]
         public async Task<IActionResult> Adicionar(PessoaCreateDto dto)
         {
-            await _service.AdicionarAsync(dto);
-
-            return Created(string.Empty, new
+            try
             {
-                mensagem = "Pessoa cadastrada com sucesso."
-            });
+                await _service.AdicionarAsync(dto);
+
+                return Created(string.Empty, new
+                {
+                    mensagem = "Pessoa cadastrada com sucesso."
+                });
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(new
+                {
+                    mensagem = ex.Message
+                });
+            }
         }
 
         [HttpPatch("{id}")]
@@ -31,20 +41,30 @@ namespace ProjetoCrudPessoa.Controllers
             int id,
             PessoaPatchDto dto)
         {
-            var atualizado = await _service.AtualizarAsync(id, dto);
-
-            if (!atualizado)
+            try
             {
-                return NotFound(new
+                var atualizado = await _service.AtualizarAsync(id, dto);
+
+                if (!atualizado)
                 {
-                    mensagem = "Pessoa não encontrada."
+                    return NotFound(new
+                    {
+                        mensagem = "Pessoa não encontrada."
+                    });
+                }
+
+                return Ok(new
+                {
+                    mensagem = "Pessoa atualizada com sucesso."
                 });
             }
-
-            return Ok(new
+            catch (InvalidOperationException ex)
             {
-                mensagem = "Pessoa atualizada com sucesso."
-            });
+                return BadRequest(new
+                {
+                    mensagem = ex.Message
+                });
+            }
         }
 
         [HttpDelete("{id}")]

@@ -15,5 +15,9 @@ namespace ProjetoCrudPessoa.Repositories
         Task<List<Pessoa>> ListarAsync(int page, int pageSize);
 
         Task<int> ContarAsync();
+
+        Task<bool> ExisteCpfAsync(string cpf);
+
+        Task<bool> ExisteCpfEmOutroRegistroAsync(int id, string cpf);
     }
 }

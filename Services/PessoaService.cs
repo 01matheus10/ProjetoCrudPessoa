@@ -15,6 +15,11 @@ namespace ProjetoCrudPessoa.Services
 
         public async Task AdicionarAsync(PessoaCreateDto dto)
         {
+            if (await _repository.ExisteCpfAsync(dto.CPF))
+            {
+                throw new InvalidOperationException("CPF já cadastrado.");
+            }
+
             var pessoa = new Pessoa
             {
                 Nome = dto.Nome,
@@ -34,11 +39,18 @@ namespace ProjetoCrudPessoa.Services
             if (pessoa == null)
                 return false;
 
+            if (dto.CPF != null)
+            {
+                if (await _repository.ExisteCpfEmOutroRegistroAsync(id, dto.CPF))
+                {
+                    throw new InvalidOperationException("CPF já cadastrado.");
+                }
+
+                pessoa.CPF = dto.CPF;
+            }
+
             if (dto.Nome != null)
                 pessoa.Nome = dto.Nome;
-
-            if (dto.CPF != null)
-                pessoa.CPF = dto.CPF;
 
             if (dto.Idade.HasValue)
                 pessoa.Idade = dto.Idade.Value;
