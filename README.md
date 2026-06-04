@@ -120,6 +120,60 @@ A documentação é gerada automaticamente pelo Swagger/OpenAPI.
 
 ---
 
+## Collection Postman
+
+Foi disponibilizada uma collection do Postman na pasta:
+
+```text
+postman/
+```
+
+A collection contém as seguintes requisições:
+
+* POST - Cadastrar Pessoa
+* GET - Listar Pessoas
+* GET - Filtrar por Nome
+* GET - Filtrar por CPF
+* GET - Nome e Paginação
+* PATCH - Atualizar Pessoa
+* PATCH - CPF Duplicado
+* DELETE - Remover Pessoa
+
+Também foi disponibilizado o ambiente:
+
+```text
+Local.postman_environment.json
+```
+
+O ambiente utiliza a variável:
+
+```text
+baseUrl
+```
+
+Valor padrão:
+
+```text
+https://localhost:7291
+```
+
+Caso a aplicação esteja sendo executada em outra porta, basta alterar o valor da variável `baseUrl`.
+
+### Como importar
+
+1. Abra o Postman.
+2. Clique no ícone de três pontos.
+3. Clique em **Import**.
+4. Importe o arquivo `ProjetoCrudPessoa.postman_collection.json`.
+5. Importe o arquivo `Local.postman_environment.json`.
+6. Selecione o ambiente **Local**.
+7. Execute as requisições da collection.
+
+```
+```
+
+---
+
 # Endpoints
 
 ## Cadastrar Pessoa

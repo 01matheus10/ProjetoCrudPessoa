@@ -1,0 +1,210 @@
+{
+  "info": {
+    "_postman_id": "bd897b2d-a722-4867-baf6-4c5dc968b10c",
+    "name": "ProjetoCrudPessoa",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "15904128"
+  },
+  "item": [
+    {
+      "name": "Cadastrar Pessoa",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"nome\": \"João Silva\",\r\n    \"cpf\": \"12345678910\",\r\n    \"idade\": 30,\r\n    \"dataNascimento\": \"1994-05-10\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/pessoas",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "pessoas"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Listar Pessoas",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/pessoas",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "pessoas"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Filtrar por Nome",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/pessoas?nome=João",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "pessoas"
+          ],
+          "query": [
+            {
+              "key": "nome",
+              "value": "João"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Filtrar por CPF",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/pessoas?cpf=12345678910",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "pessoas"
+          ],
+          "query": [
+            {
+              "key": "cpf",
+              "value": "12345678910"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Nome e Paginação",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/pessoas?page=1&pageSize=5&nome=João",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "pessoas"
+          ],
+          "query": [
+            {
+              "key": "page",
+              "value": "1"
+            },
+            {
+              "key": "pageSize",
+              "value": "5"
+            },
+            {
+              "key": "nome",
+              "value": "João"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Atualizar Pessoa",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"nome\": \"João Santos\",\r\n    \"idade\": 31\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/pessoas/1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "pessoas",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "CPF Duplicado",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"cpf\": \"12345678910\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/pessoas/1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "pessoas",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Remover Pessoa",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/pessoas/1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "pessoas",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
