@@ -29,9 +29,13 @@ namespace ProjetoCrudPessoa.Controllers
             }
             catch (InvalidOperationException ex)
             {
-                return BadRequest(new
+                return BadRequest(new ErrorResponseDto
                 {
-                    mensagem = ex.Message
+                    Mensagem = "Erro de validação.",
+                    Erros = new List<string>
+                {
+                    ex.Message
+                }
                 });
             }
         }
@@ -47,9 +51,13 @@ namespace ProjetoCrudPessoa.Controllers
 
                 if (!atualizado)
                 {
-                    return NotFound(new
+                    return NotFound(new ErrorResponseDto
                     {
-                        mensagem = "Pessoa não encontrada."
+                        Mensagem = "Recurso não encontrado.",
+                        Erros = new List<string>
+                        {
+                            "Pessoa não encontrada."
+                        }
                     });
                 }
 
@@ -60,9 +68,13 @@ namespace ProjetoCrudPessoa.Controllers
             }
             catch (InvalidOperationException ex)
             {
-                return BadRequest(new
+                return BadRequest(new ErrorResponseDto
                 {
-                    mensagem = ex.Message
+                    Mensagem = "Erro de validação.",
+                    Erros = new List<string>
+                    {
+                        ex.Message
+                    }
                 });
             }
         }
@@ -74,9 +86,13 @@ namespace ProjetoCrudPessoa.Controllers
 
             if (!removido)
             {
-                return NotFound(new
+                return NotFound(new ErrorResponseDto
                 {
-                    mensagem = "Pessoa não encontrada."
+                    Mensagem = "Recurso não encontrado.",
+                    Erros = new List<string>
+                    {
+                        "Pessoa não encontrada."
+                    }
                 });
             }
 

@@ -243,6 +243,38 @@ Os filtros são opcionais e podem ser combinados com a paginação.
 
 ---
 
+## Tratamento de Erros
+
+A API retorna respostas padronizadas para erros de validação e regras de negócio.
+
+### Exemplo de erro de validação
+
+```json
+{
+  "sucesso": false,
+  "mensagem": "Erro de validação.",
+  "erros": [
+    "CPF já cadastrado."
+  ]
+}
+```
+
+### Exemplo de recurso não encontrado
+
+```json
+{
+  "sucesso": false,
+  "mensagem": "Recurso não encontrado.",
+  "erros": [
+    "Pessoa não encontrada."
+  ]
+}
+```
+
+As validações realizadas pelo FluentValidation também seguem o mesmo padrão de resposta, retornando uma lista de erros quando necessário.
+
+---
+
 ## Funcionalidades Implementadas
 
 * Cadastro de pessoas
@@ -252,6 +284,7 @@ Os filtros são opcionais e podem ser combinados com a paginação.
 * Filtro opcional por nome
 * Filtro opcional por CPF
 * Validação de CPF duplicado
+* Padronização das respostas de erro
 * Validação com FluentValidation
 * Persistência utilizando Entity Framework Core
 * Migrations para criação do banco de dados

@@ -1,7 +1,9 @@
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProjetoCrudPessoa.Data;
+using ProjetoCrudPessoa.DTOs;
 using ProjetoCrudPessoa.Repositories;
 using ProjetoCrudPessoa.Services;
 using ProjetoCrudPessoa.Validators;
@@ -9,7 +11,27 @@ using ProjetoCrudPessoa.Validators;
 var builder = WebApplication.CreateBuilder(args);
 
 // Controllers
-builder.Services.AddControllers();
+builder.Services
+    .AddControllers()
+    .ConfigureApiBehaviorOptions(options =>
+    {
+        options.InvalidModelStateResponseFactory = context =>
+        {
+            var erros = context.ModelState
+                .Values
+                .SelectMany(v => v.Errors)
+                .Select(e => e.ErrorMessage)
+                .ToList();
+
+            var response = new ErrorResponseDto
+            {
+                Mensagem = "Erro de validação.",
+                Erros = erros
+            };
+
+            return new BadRequestObjectResult(response);
+        };
+    });
 
 // Swagger/OpenAPI
 builder.Services.AddEndpointsApiExplorer();
